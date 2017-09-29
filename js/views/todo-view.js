@@ -21,6 +21,7 @@ var app = app || {};
 			'dblclick label': 'edit',
 			'click .destroy': 'clear',
 			'click .edit-btn': 'edit',
+			'click .priority-btn': 'prioritize',
 			'keypress .edit': 'updateOnEnter',
 			'keydown .edit': 'revertOnEscape',
 			'blur .edit': 'close'
@@ -128,6 +129,24 @@ var app = app || {};
 		// Remove the item, destroy the model from *localStorage* and delete its view.
 		clear: function () {
 			this.model.destroy();
+		},
+
+
+		prioritize: function () {
+			let prioritized = this.model.get('prioritized');
+			console.log('at prioritize');
+			console.log(prioritized);
+			//prioritized = (prioritized === 'true');
+
+			prioritized = !prioritized;
+			console.log(prioritized);
+
+			this.model.save({ prioritized: prioritized });
+			console.log(this.$el);
+			this.$el.toggleClass('priority', prioritized);
+
+			//this.model.destroy();
 		}
+
 	});
 })(jQuery);
