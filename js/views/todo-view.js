@@ -52,6 +52,7 @@ var app = app || {};
 
 			this.$el.html(this.template(this.model.toJSON()));
 			this.$el.toggleClass('completed', this.model.get('completed'));
+			this.$el.toggleClass('priority', this.model.get('priority'));
 			this.toggleVisible();
 			this.$input = this.$('.edit');
 			return this;
@@ -133,19 +134,7 @@ var app = app || {};
 
 
 		prioritize: function () {
-			let prioritized = this.model.get('prioritized');
-			console.log('at prioritize');
-			console.log(prioritized);
-			//prioritized = (prioritized === 'true');
-
-			prioritized = !prioritized;
-			console.log(prioritized);
-
-			this.model.save({ prioritized: prioritized });
-			console.log(this.$el);
-			this.$el.toggleClass('priority', prioritized);
-
-			//this.model.destroy();
+			this.model.togglePriority();
 		}
 
 	});
